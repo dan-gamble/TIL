@@ -23,10 +23,12 @@ Given this CSS:
 }
 ```
 
-To produce this: https://i.imgur.com/xDBY5N8.png
+To produce this:
+![broken](https://i.imgur.com/JIUzFIK.png)
 
 We clearly have the problem where the `::after` is going above the border.
 
 #Fix
 
-Just change `border` to `outline` and voila: https://i.imgur.com/ZDvKuWs.png
+Just change `border` to `outline` and voila:
+![fixed](https://i.imgur.com/YghRZ7H.png)
