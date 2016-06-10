@@ -24,11 +24,11 @@ Given this CSS:
 ```
 
 To produce this:
-![broken](https://i.imgur.com/JIUzFIK.png)
+![broken](https://i.imgur.com/PihBZql.png)
 
 We clearly have the problem where the `::after` is going above the border.
 
 #Fix
 
 Just change `border` to `outline` and voila:
-![fixed](https://i.imgur.com/YghRZ7H.png)
+![fixed](https://i.imgur.com/aAbn9T7.png)
