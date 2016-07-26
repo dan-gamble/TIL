@@ -20,9 +20,6 @@ export function doubleContentImages () {
       if (!image) {
         // There's no image, bye bye
         continue
-      } else if (image.parentNode.childNodes.length > 1) {
-        // There is an image but it is accompanied with other elements
-        continue
       }
 
       /*
