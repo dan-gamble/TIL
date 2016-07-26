@@ -17,8 +17,8 @@ export function doubleContentImages () {
       // We want to find a WYSIWYG that has just an image inside it
       const image = wysiwyg.querySelector('img')
 
+      // There's no image, bye bye
       if (!image) {
-        // There's no image, bye bye
         continue
       }
 
