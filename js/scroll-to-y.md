@@ -40,3 +40,9 @@ function scrollToY(scrollTargetY = 0, speed = 300, easing = 'easeInOutQuint') {
     tick()
   }
 ```
+
+Then just use it like:
+
+```javascript
+scrollToY(integer)
+```
