@@ -1,4 +1,7 @@
+# Bad
 ![Bad hover](http://i.imgur.com/kGwpXE3.gif)
+
+# Good
 ![Good hover](http://i.imgur.com/q3hG1Bd.gif)
 
 When hovering over navigation items we want to allow for lazy mouse movement like the 2nd gif. We can achieve this easily by just adding a `transition-delay`
