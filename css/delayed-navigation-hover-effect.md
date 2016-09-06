@@ -20,3 +20,6 @@ When hovering over navigation items we want to allow for lazy mouse movement lik
 ```
 
 Voila!
+
+## Bare in mind
+This doesn't really work if the dropdown varies in height on each item as you will end up with visually overlapping dropdowns. When they are all the same size you never see the overlap
