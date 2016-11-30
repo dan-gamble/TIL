@@ -1,4 +1,6 @@
-This was for Owlsone
+This creates a keyline underneath nav items that slides along based on the hover
+
+This was for Owlsone:
 
 ```javascript
 export class Keyline {
