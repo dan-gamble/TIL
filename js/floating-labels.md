@@ -1,10 +1,10 @@
 #### Javascript
 ```javascript
 class FloatingLabels {
-  constructor () {
+  constructor (form) {
     this.activeClass = 'frm-FloatingContainer-active'
 
-    this.form = document.querySelector('.frm-FloatingContainer').closest('form')
+    this.form = form
     this.items = Array.from(this.form.querySelectorAll('.frm-FloatingContainer'))
     this.inputs = this.items.map((x) => x.querySelector('input, textarea'))
 
@@ -29,6 +29,10 @@ class FloatingLabels {
       input.closest('.frm-FloatingContainer').classList.remove(this.activeClass)
     }
   }
+}
+
+for (const form of document.querySelectorAll('.frm-Form')) {
+  new FloatingLabels(form) // eslint-disable-line no-new
 }
 ```
 
