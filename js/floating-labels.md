@@ -1,3 +1,4 @@
+#### Javascript
 ```javascript
 class FloatingLabels {
   constructor () {
@@ -31,6 +32,7 @@ class FloatingLabels {
 }
 ```
 
+#### HTML
 ```html
 <div class="frm-FloatingContainer">
   <label class="frm-Label" for="{{ input.id_for_label }}">
