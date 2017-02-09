@@ -39,8 +39,8 @@ def render_pagination(context, page_obj, offset=2, pagination_key=None):
           <span class="pgn-Pagination_ControlText">Previous page</span>
   
           <span class="pgn-Pagination_ControlSVG">
-              {% include 'arrow-left.svg' %}
-            </span>
+            {% include 'arrow-left.svg' %}
+          </span>
         {% endmacro %}
   
         <a class="pgn-Pagination_Control pgn-Pagination_Control-prev"
@@ -112,8 +112,8 @@ def render_pagination(context, page_obj, offset=2, pagination_key=None):
           <span class="pgn-Pagination_ControlText">Next page</span>
   
           <span class="pgn-Pagination_ControlSVG">
-              {% include 'arrow-right.svg' %}
-            </span>
+            {% include 'arrow-right.svg' %}
+          </span>
         {% endmacro %}
   
         <a class="pgn-Pagination_Control pgn-Pagination_Control-next"
