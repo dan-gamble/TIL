@@ -1,8 +1,13 @@
 For pagination like:
 
-`« 1 ... 4 5 6 ... 42 »`
+(Square brackets denote active item)
 
-`[1, '...', 4, 5, 6, '...', 42]`
+`« 1 ... 4 5 [ 6 ] 7 8 ... 42 »`
+
+Covers edge cases like:
+
+###### The index that should be ellipsed is made into a number if it would keep the numbers sequential
+`« 1 2 3 4 [ 5 ] 6 7 ... 42 »`
 
 ```python
 @library.global_function
