@@ -4,18 +4,53 @@ For pagination like:
 
 `[1, '...', 4, 5, 6, '...', 42]`
 
+```python
+@library.global_function
+@library.render_with('pagination/pagination.html')
+@jinja2.contextfunction
+def render_pagination(context, page_obj, offset=2, pagination_key=None):
+    """Renders the pagination for the given page of items."""
+    current_page = page_obj.number
+    offset_indexes = [x for x in range(current_page - offset, current_page + (offset + 1)) if x >= 1]
+
+    print offset_indexes
+
+    return {
+        "request": context["request"],
+        "offset_indexes": offset_indexes,
+        "offset": offset,
+        "page_obj": page_obj,
+        "paginator": page_obj.paginator,
+        "pagination_key": pagination_key or getattr(page_obj, "_pagination_key", "page")
+    }
+```
+
 ```jinja
 {% macro pagination(page_obj) %}
   {% if page_obj.has_other_pages() %}
     <nav class="pgn-Pagination">
       {% if page_obj.has_previous() %}
-        <div class="pgn-Pagination_Control pgn-Pagination_Control-prev">
-          <a href="{{ get_pagination_url(page_obj.previous_page_number()) }}">
-            &laquo;
-          </a>
-        </div>
+        {% macro prev_control() %}
+          <span class="pgn-Pagination_ControlText">Previous page</span>
+  
+          <span class="pgn-Pagination_ControlSVG">
+              {% include 'arrow-left.svg' %}
+            </span>
+        {% endmacro %}
+  
+        <a class="pgn-Pagination_Control pgn-Pagination_Control-prev"
+           href="{{ get_pagination_url(page_obj.previous_page_number()) }}"
+           rel="prev">
+          {{ prev_control() }}
+        </a>
+      {% else %}
+        <button class="pgn-Pagination_Control pgn-Pagination_Control-prev"
+                type="submit"
+                aria-disabled="true">
+          {{ prev_control() }}
+        </button>
       {% endif %}
-
+  
       <div class="pgn-Pagination_Items">
         {% macro item(loop, page) %}
           <div class="pgn-Pagination_Item"
@@ -23,54 +58,72 @@ For pagination like:
             <a class="pgn-Pagination_Link" href="{{ get_pagination_url(page) }}">{{ page }}</a>
           </div>
         {% endmacro %}
-
+  
         {% for page in page_obj.paginator.page_range %}
-          {% if loop.first or loop.last or loop.index == page_obj.number %}
-
+          {% if loop.first or loop.last or loop.index in offset_indexes %}
+  
             {{ item(loop, page) }}
-
-          {% elif loop.index == page_obj.number - 1 %}
-
-            {% if loop.index != 2 %}
-              <div class="pgn-Pagination_Item">
-                <button class="pgn-Pagination_Link" type="button" disabled>&hellip;</button>
-              </div>
+  
+          {% else %}
+            {# We'll ellipsis the first item before the offset_indexes unless it is the 2nd item #}
+            {% if page_obj.paginator.num_pages != page_obj.number - (offset + 1) and page_obj.number - (offset + 1) == loop.index %}
+  
+              {% if loop.index == 2 %}
+  
+                {{ item(loop, page) }}
+  
+              {% else %}
+  
+                <div class="pgn-Pagination_Item">
+                  <button class="pgn-Pagination_Link" type="button" disabled>&hellip;</button>
+                </div>
+  
+              {% endif %}
+  
+              {# Same as above just on the first index after the offset_indexes #}
+            {% elif page_obj.paginator.num_pages != page_obj.number + (offset + 1) and page_obj.number + (offset + 1) == loop.index %}
+  
+              {% if loop.index == page_obj.paginator.num_pages - 1 %}
+  
+                {{ item(loop, page) }}
+  
+              {% else %}
+  
+                <div class="pgn-Pagination_Item">
+                  <button class="pgn-Pagination_Link" type="button" disabled>&hellip;</button>
+                </div>
+  
+              {% endif %}
+  
             {% endif %}
-
-            {{ item(loop, page) }}
-
-          {% elif loop.index == page_obj.number + 1 %}
-
-            {{ item(loop, page) }}
-
-            {% if page_obj.paginator.num_pages != page_obj.number + 2 %}
-
-              <div class="pgn-Pagination_Item">
-                <button class="pgn-Pagination_Link" type="button" disabled>&hellip;</button>
-              </div>
-
-            {% endif %}
-
-          {% elif loop.index < page_obj.number or loop.index > page_obj.number %}
-
+  
           {% endif %}
+  
         {% endfor %}
       </div>
-
+  
       {% if page_obj.has_next() %}
-        <div class="pgn-Pagination_Control pgn-Pagination_Control-next">
-          <a href="{{ get_pagination_url(page_obj.next_page_number()) }}">
-            &raquo;
-          </a>
-        </div>
+        {% macro next_control() %}
+          <span class="pgn-Pagination_ControlText">Next page</span>
+  
+          <span class="pgn-Pagination_ControlSVG">
+              {% include 'arrow-right.svg' %}
+            </span>
+        {% endmacro %}
+  
+        <a class="pgn-Pagination_Control pgn-Pagination_Control-next"
+           href="{{ get_pagination_url(page_obj.next_page_number()) }}"
+           rel="next">
+          {{ next_control() }}
+        </a>
+      {% else %}
+        <button class="pgn-Pagination_Control pgn-Pagination_Control-next"
+                type="submit"
+                aria-disabled="true">
+          {{ next_control() }}
+        </button>
       {% endif %}
     </nav>
-
-    {% if page_obj.paginator.page_range|length > 20 %}
-      <form action="{{ request.get_full_path() }}" class="pgn-Form">
-        <input class="pgn-Form_Input" type="text" name="page" value="{{ page_obj.number }}">
-      </form>
-    {% endif %}
   {% endif %}
 {% endmacro %}
 ```
