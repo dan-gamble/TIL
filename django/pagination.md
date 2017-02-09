@@ -70,6 +70,7 @@ def render_pagination(context, page_obj, offset=2, pagination_key=None):
             {{ item(loop, page) }}
   
           {% else %}
+            
             {# We'll ellipsis the first item before the offset_indexes unless it is the 2nd item #}
             {% if page_obj.paginator.num_pages != page_obj.number - (offset + 1) and page_obj.number - (offset + 1) == loop.index %}
   
@@ -85,7 +86,7 @@ def render_pagination(context, page_obj, offset=2, pagination_key=None):
   
               {% endif %}
   
-              {# Same as above just on the first index after the offset_indexes #}
+            {# Same as above just on the first index after the offset_indexes #}
             {% elif page_obj.paginator.num_pages != page_obj.number + (offset + 1) and page_obj.number + (offset + 1) == loop.index %}
   
               {% if loop.index == page_obj.paginator.num_pages - 1 %}
