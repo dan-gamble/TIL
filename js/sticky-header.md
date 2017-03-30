@@ -12,11 +12,10 @@ export class StickyNavigation {
     this.isTicking = false
     this.offset = 50
 
-    // This will set up all the scrollY tracking points we need
     this._setupInitial()
     this._setupListeners()
 
-    // Fire the onScroll event so we can position it initially
+    // Fire the onScroll event so we can capture initial values
     this._onScroll()
   }
 
