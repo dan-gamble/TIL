@@ -1,4 +1,4 @@
-From: https://www.reddit.com/r/RoastMe/comments/6aeian/fuck_it/
+From: http://stackoverflow.com/questions/33859113/javascript-removeeventlistener-not-working-inside-a-class/33859264#33859264
 
 TL;DR the `.bind()` creates a new instance of the function every time so the function we are passing to `removeEventListener` is different to the one we use in `addEventListener` unless we use a `funcHandler`
 
