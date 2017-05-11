@@ -2,7 +2,7 @@ From: http://stackoverflow.com/questions/33859113/javascript-removeeventlistener
 
 TL;DR the `.bind()` creates a new instance of the function every time so the function we are passing to `removeEventListener` is different to the one we use in `addEventListener` unless we use a `funcHandler`
 
-```
+```javascript
 class Test {
   constructor () {
     this.funcHandler = this.func.bind(this)
@@ -11,3 +11,4 @@ class Test {
     window.removeEventListener('scroll', this.funcHandler)
   }
 }
+```
