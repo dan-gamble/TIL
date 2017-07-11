@@ -1,4 +1,4 @@
-```
+```python
 def get_current_trials(self):
     # Select the ones the user has chosen
     selected_trials = list(self.trials.all())
