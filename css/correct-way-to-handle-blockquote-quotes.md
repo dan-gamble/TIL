@@ -1,6 +1,6 @@
 ```scss
 .wys-Quote {
-  quotes: "\201C" "\201D" "\2018" "\2019";
+  quotes: '\201C' '\201D' '\2018' '\2019';
 }
 
 .wys-Quote_Quote {
