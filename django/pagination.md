@@ -18,8 +18,6 @@ def render_pagination(context, page_obj, offset=2, pagination_key=None):
     current_page = page_obj.number
     offset_indexes = [x for x in range(current_page - offset, current_page + (offset + 1)) if x >= 1]
 
-    print offset_indexes
-
     return {
         "request": context["request"],
         "offset_indexes": offset_indexes,
