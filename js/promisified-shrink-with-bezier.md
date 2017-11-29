@@ -42,7 +42,7 @@ function shrink ({ el, start, end, duration = 300, easing = 'easeInOutQuint' }) 
 
 shrink({
   el: document.getElementById('example'),
-  start: 0,
-  end: 100,
+  start: 100,
+  end: 50,
 })
 ```
