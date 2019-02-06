@@ -3,7 +3,7 @@ According to this post: https://stackoverflow.com/a/5024181/1633113 we need to d
 ```javascript
 const imageEl = document.getElementById('image_id')
 const dummyImage = new Image()
-img.addEventListener('load', myFunction, false)
-img.src = 'http://newimgsource.jpg'
-photo.src = img.src
+dummyImage.addEventListener('load', myFunction, false)
+dummyImage.src = 'http://newimgsource.jpg'
+imageEl.src = img.src
 ```
